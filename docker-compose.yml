@@ -1,0 +1,55 @@
+version: "3.8"
+
+networks:
+  lunii-net:
+    name: lunii-net
+
+services:
+  #############################################
+  ##              Web Application            ##
+  #############################################
+  front:
+    build: ./front
+    container_name: front
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./front/:/usr/src/app
+    ports:
+      - "3000:3000"
+    networks:
+      lunii-net:
+        aliases:
+          - front
+  #############################################
+  ##                DATABASE                 ##
+  #############################################
+  lunii-mongo:
+    container_name: lunii-mongo
+    image: mongo
+    volumes:
+      - ./mongodb-datastore:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      lunii-net:
+        aliases:
+          - lunii-mongo
+  #############################################
+  ##                   API                   ##
+  #############################################
+  api-v1-shortener:
+    build: ./api-v1-shortener
+    container_name: "api-v1-shortener"
+    volumes:
+      - /usr/src/app/node_modules # Bookmarking
+      - ./api-v1-shortener/:/usr/src/app
+    environment:
+      - DB_HOST=mongodb://lunii-mongo:27017/lunii
+      - PORT=20000
+    ports:
+      - "20000:20000"
+    networks:
+      lunii-net:
+        aliases:
+          - api-v1-shortener
