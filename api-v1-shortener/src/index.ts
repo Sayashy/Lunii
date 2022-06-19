@@ -17,7 +17,7 @@ database.connect();
 
 app.use('/*', handleOptionRequest);
 
-app.all('/:id', makeCallback(shortenerController));
+app.get('/:id', makeCallback(shortenerController));
 app.all('/*', makeCallback(shortenerController));
 
 app.listen(port, () => {
