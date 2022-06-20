@@ -1,4 +1,3 @@
-import database from '../db';
 import shortUrlSchema from '../db/shortUrlSchema';
 import makerShortenerRepo from './shortenerRepo';
 
