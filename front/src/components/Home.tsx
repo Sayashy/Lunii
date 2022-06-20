@@ -27,7 +27,7 @@ const Home = () => {
 
   const copyWithFade = () => {
     setFade(true);
-    copyToClipboard('http://localhost:20000/' + url.short);
+    copyToClipboard('http://localhost:3000/' + url.short);
     setTimeout(() => setFade(false), 600);
   };
 

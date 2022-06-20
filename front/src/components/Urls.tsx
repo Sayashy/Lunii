@@ -38,7 +38,11 @@ const Urls = () => {
       width: 110,
       renderCell: (params: GridRenderCellParams<Date>) => (
         <ButtonGroup disableElevation variant="contained">
-          <Button size="small" color="info" onClick={() => changeLocation(params.row.full)}>
+          <Button
+            size="small"
+            color="info"
+            onClick={() => changeLocation(`${window.location.host}/${params.row.short}`)}
+          >
             <Search />
           </Button>
           <Button size="small" color="error" onClick={() => deleteUrl(params.row._id)}>

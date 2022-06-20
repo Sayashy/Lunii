@@ -21,8 +21,7 @@ const copyToClipboard = (text: string) => {
 };
 
 const changeLocation = (url: string) => {
-  if (!/^https?:\/\//i.test(url)) window.open('http://' + url, '_blank');
-  else window.open(url, '_blank');
+  window.location.href = !/^https?:\/\//i.test(url) ? 'http://' + url : url;
 };
 
 export { changeLocation, copyToClipboard, isURL };
